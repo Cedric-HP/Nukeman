@@ -1,0 +1,22 @@
+body {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#playground {
+    overflow: hidden;
+    height: 900px;
+    width: 900px;
+    border: 1px solid black;
+    background-color: azure;
+}
+#block {
+    position: relative;
+    height: 50px;
+    width: 50px;
+    background-color: blue;
+    top: 50px;
+    left: 50px;
+}
