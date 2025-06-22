@@ -1,4 +1,8 @@
+* {
+    margin: 0;
+}
 body {
+    height: 100vh;
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -26,8 +30,8 @@ body {
     border: 1px solid blue;
 }
 #block_2 {
-    height: 38px;
-    width: 38px;
+    height: 18px;
+    width: 18px;
     background-color: red;
     border: 1px solid red;
 }
@@ -63,4 +67,15 @@ body {
     font-size: 1.5rem;
     font-weight: 600;
     color: blue;
+}
+
+@keyframes explsotion {
+    0% {
+        background-color: rgb(221, 183, 111);
+        opacity: 1;
+    }
+    100% {
+        background-color: rgb(255, 0, 0);
+        opacity: 0;
+    }
 }
