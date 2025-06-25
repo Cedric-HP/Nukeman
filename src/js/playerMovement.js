@@ -1,7 +1,7 @@
 
 // Import
 
-import { square_1, square_2 } from "./utilitys.js";
+import { objList, square_1, square_2 } from "./utilitys.js";
 import { createBombe } from "./bomb.js";
 import { objColliderChecker } from "./hit_Box.js";
 import { objHpValue, movingByP1, movingByP2 } from "./stats.js";
@@ -27,22 +27,22 @@ const moveplayer_1 = (keyInput) => {
     if (objHpValue.player_1 > 0) {
         switch (keyInput) {
             case 38: // Up Arrow | Flèche du haut
-                if (parseInt(square_1.style.top) != 0 && objColliderChecker(square_1, "UP")) {
+                if (parseInt(square_1.style.top) != 0 && objColliderChecker(square_1, "UP", objList)) {
                     square_1.style.top = parseInt(square_1.style.top) - movingByP1 + "px";
                 }
                 break;
             case 40: // Down Arrow | Flèche du bas
-                if (parseInt(square_1.style.top) != (900 - parseInt(square_1.style.width)) && objColliderChecker(square_1, "DOWN")) {
+                if (parseInt(square_1.style.top) != (parseInt(playground.height) - parseInt(square_1.style.width)) && objColliderChecker(square_1, "DOWN", objList)) {
                     square_1.style.top = parseInt(square_1.style.top) + movingByP1 + "px";
                 }
                 break;
             case 37: // Left Arrow | Flèche de Gauche
-                if (parseInt(square_1.style.left) != 0 && objColliderChecker(square_1, "LEFT")) {
+                if (parseInt(square_1.style.left) != 0 && objColliderChecker(square_1, "LEFT", objList)) {
                     square_1.style.left = parseInt(square_1.style.left) - movingByP1 + "px";
                 }
                 break;
             case 39: // Right Arrow | Flèche de droite
-                if (parseInt(square_1.style.left) != (900 - parseInt(square_1.style.width)) && objColliderChecker(square_1, "RIGHT")) {
+                if (parseInt(square_1.style.left) != (parseInt(playground.width) - parseInt(square_1.style.width)) && objColliderChecker(square_1, "RIGHT", objList)) {
                     square_1.style.left = parseInt(square_1.style.left) + movingByP1 + "px";
                 }
                 break;
@@ -61,22 +61,22 @@ const moveplayer_2 = (keyInput) => {
     if (objHpValue.player_2 > 0) {
         switch(keyInput) {
             case 90: // Z
-                if (parseInt(square_2.style.top) != 0 && objColliderChecker(square_2, "UP")) {
+                if (parseInt(square_2.style.top) != 0 && objColliderChecker(square_2, "UP", objList)) {
                     square_2.style.top = parseInt(square_2.style.top) - movingByP2 + "px";
                 }
                 break;
             case 83: // S
-                if (parseInt(square_2.style.top) != (900 - parseInt(square_2.style.width)) && objColliderChecker(square_2, "DOWN")) {
+                if (parseInt(square_2.style.top) != (parseInt(playground.height) - parseInt(square_2.style.width)) && objColliderChecker(square_2, "DOWN", objList)) {
                     square_2.style.top = parseInt(square_2.style.top) + movingByP2 + "px";
                 }
                 break;
             case 81: // Q
-                if (parseInt(square_2.style.left) != 0 && objColliderChecker(square_2, "LEFT")) {
+                if (parseInt(square_2.style.left) != 0 && objColliderChecker(square_2, "LEFT", objList)) {
                     square_2.style.left = parseInt(square_2.style.left) - movingByP2 + "px";
                 }
                 break;
             case 68: // D
-                if (parseInt(square_2.style.left) != (900 - parseInt(square_2.style.width)) && objColliderChecker(square_2, "RIGHT")) {
+                if (parseInt(square_2.style.left) != (parseInt(playground.width) - parseInt(square_2.style.width)) && objColliderChecker(square_2, "RIGHT", objList)) {
                     square_2.style.left = parseInt(square_2.style.left) + movingByP2 + "px";
                 }
                 break;

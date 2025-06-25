@@ -7,11 +7,18 @@
     <link rel="stylesheet" href="./src/styles.css" />
   </head>
   <body>
+    <!-- Play-Ground Section -->
+
     <section id="playground">
-      <div id="block_1"></div>
-      <div id="block_2"></div>
+      <div id="body_1"></div>
+      <div id="body_2"></div>
     </section>
+
+    <!-- Stats Section -->
+
     <section id="stats">
+      <!-- PLayer 1 Stats -->
+
       <div class="display_hp">
         <span id="hpValuePlayer1">100 HP</span>
         <div class="hpbarre">
@@ -21,6 +28,9 @@
       <div class="display">
         P1 Bombe Cooldown: <span id="cooldown_player_1">Ready!</span>
       </div>
+
+      <!-- Player 2 Stats  -->
+
       <div class="display_hp">
         <span id="hpValuePlayer2">100 HP</span>
         <div class="hpbarre">
@@ -30,10 +40,15 @@
       <div class="display">
         P2 Bombe Cooldown: <span id="cooldown_player_2">Ready!</span>
       </div>
-      <div class="display">
-        Tableau Bomb Liste: <span id="array_display"></span>
+
+      <!-- Button Section -->
+
+      <div class="display buttonfield">
+        <button class="button" id="generate_button">Generate the Map</button>
+        <button class="button" id="restart_button">Restart</button>
       </div>
     </section>
     <script type="module" src="./src/js/script.js"></script>
+    <script type="module" src="./src/js/menu.js"></script>
   </body>
 </html>

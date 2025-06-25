@@ -1,26 +1,11 @@
-
-// Import
-
-import { bombList } from "./utilitys.js"
 import { objHpValue } from "./stats.js"
 
 // Import HTML Display
 
-let display_array = document.querySelector("#array_display")
 let display_Hp_Value_Player_1 = document.querySelector("#hpValuePlayer1")
 let display_Hp_Value_Player_2 = document.querySelector("#hpValuePlayer2")
 let display_Hp_Barre_Player_1 = document.querySelector("#hpPlayer1")
 let display_Hp_Barre_Player_2 = document.querySelector("#hpPlayer2")
-
-// Display Bomb List
-
-export function executeDisplay ()  {
-    let array = ""
-    for (let item of bombList) {
-        array += String(item) + " "
-    }
-    display_array.textContent = array
-}
 
 // Display Hp Barre and Values
 

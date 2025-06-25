@@ -7,8 +7,8 @@
 ## Features to develop
 
 - [x] The Field
-- [ ] Terrain generation
-- [ ] Obstacles (fixed or random)
+- [x] Terrain generation
+- [x] Obstacles (fixed or random)
 - [x] player movement
 - [x] Players Statistics editable via PowerUp
 - [x] Nuke
@@ -21,6 +21,9 @@
   - [ ] Nuke Power (Stackable)
   - [ ] Number of Nukes (Stackable)
   - [ ] Changing the player size (Temporary)
+- [ ] Menu
+- [ ] Level system
+- [ ] Win round by the one who has the most kill
 
 # NUKEMAN
 
@@ -31,17 +34,20 @@
 ## Fonctionnalités à développer
 
 - [x] Le terrain
-- [ ] Génération de terrain
-- [ ] Les obstacles (fixe ou random)
+- [x] Génération de terrain
+- [x] Les obstacles (fixe ou random)
 - [x] Déplacement des joueurs
 - [x] Statistiques des joueurs modifiables via PowerUp
 - [x] Nuke
 - [x] Collisions (Obstacles, joueurs, Ennemis, Nuke)
 - [x] Le Respawn
 - [ ] Un Minuteur
-- [ ] Les Pöwers Up
+- [ ] Les Powers Up
   - [ ] Spawn aléatoire et objet ramassable
   - [x] Invincibilité (Temporaire)
   - [ ] Nuke Power (Stackable)
   - [ ] Nombre de Nuke (Stackable)
   - [ ] Modification de la taille du joueur (Temporaire)
+- [ ] Menu
+- [ ] Système de niveaux
+- [ ] Manche gagnée par celui qui a le plus de kill

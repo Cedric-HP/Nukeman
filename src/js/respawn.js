@@ -1,10 +1,5 @@
-
-// Import
-
-import { playerIdentifier, playerlist } from "./utilitys.js"
-import { objHpValue } from "./stats.js"
-
-// Export
+import { lastHitByList, playerIdentifier, playerlist } from "./utilitys.js"
+import { objHpMaxValue, objHpValue } from "./stats.js"
 
 export {hisRespawning, hisInvincible, invincibilityTime}
 
@@ -45,18 +40,18 @@ export function respawn (player_resp) {
         if(timer == 0) {
             if (player_resp == "player_1" ){
                 playerIdentifier[player_resp].style.backgroundColor = "blue"
-                playerIdentifier[player_resp].style.top = 0 + "px"
-                playerIdentifier[player_resp].style.left = 0 + "px"
+                playerIdentifier[player_resp].style.top = 20 + "px"
+                playerIdentifier[player_resp].style.left = 20 + "px"
             }
             else {
                 playerIdentifier[player_resp].style.backgroundColor = "red"
-                playerIdentifier[player_resp].style.top = (900 - parseInt(playerIdentifier[player_resp].style.width)) + "px"
-                playerIdentifier[player_resp].style.left = (900 - parseInt(playerIdentifier[player_resp].style.width)) + "px"
+                playerIdentifier[player_resp].style.top = ((parseInt(playground.height) - 20 ) - parseInt(playerIdentifier[player_resp].style.width)) + "px"
+                playerIdentifier[player_resp].style.left = ((parseInt(playground.width) - 20 )- parseInt(playerIdentifier[player_resp].style.width)) + "px"
             }
             hisInvincible[player_resp] = true
             invincibilityTime[player_resp] = 200
             incincibility(player_resp)
-            objHpValue[player_resp] = 100
+            objHpValue[player_resp] = objHpMaxValue[player_resp]
             hisRespawning[player_resp] = false
             clearInterval(contDown)
         }
@@ -72,9 +67,11 @@ export function respawn (player_resp) {
 export function respawnTrigger () {
     for (let player_item of playerlist) {
         if (objHpValue[player_item] <= 0 && !hisRespawning[player_item]) {
+            lastHitByList[player_item] = ""
             objHpValue[player_item] = 0
             respawn(player_item)
             hisRespawning[player_item] = true
+
         }
     }
 }
