@@ -1,4 +1,19 @@
-export {playerIdentifier, bombCount, bombList, square_1, square_2, playerlist, objList, lastHitByList, hisIndestructible, positionBlackList, playground, objSpecial }
+export {
+    playerIdentifier,
+    bombCount,
+    bombList,
+    square_1,
+    square_2,
+    playerlist,
+    objList,
+    lastHitByList,
+    hisIndestructible,
+    positionBlackList,
+    playground,
+    objSpecial,
+    hasTakeHit,
+    generationUtilitises
+}
 
 // Players HTML import
 
@@ -52,9 +67,27 @@ const lastHitByList = {
     player_2: ""
 }
 
+//Generation Utilitise
+
+const generationUtilitises = {
+    isGenerating: false,
+    timeLeft: false,
+    executed: 0,
+    finish: 0,
+    count1: 0,
+    count2: 0,
+}
+
 // His Indestructible (for blocks)
 
 const hisIndestructible = {}
+
+// Has take Hit
+
+const hasTakeHit = {
+    player_1: {takeHit: false, inCooldown: false},
+    player_2: {takeHit: false, inCooldown: false}
+}
 
 // Bomb Count
 

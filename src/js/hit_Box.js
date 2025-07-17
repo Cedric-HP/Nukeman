@@ -25,15 +25,13 @@ const hitBoxchecker = (direction, xObj_1, yObj_1, xSizeObj1, ySizeObj1, xObj_2, 
             else {
                 return true
             }
-            break;
         case "DOWN":
             if( ( yObj_1 < yObj_2 + ySizeObj2 && yObj_2 - yObj_1 <= ySizeObj1 ) && ( xObj_1 < xObj_2 + xSizeObj2 && xObj_2 - xObj_1 < xSizeObj1 ) ) {
                 return false
             }
             else {
                 return true
-            }q
-            break;
+            }
         case "LEFT":
             if( ( xObj_1 <= xObj_2 + xSizeObj2 && xObj_2 - xObj_1 < xSizeObj1 ) && ( yObj_1 < yObj_2 + ySizeObj2 && yObj_2 - yObj_1 < ySizeObj1 ) ) {
                 return false
@@ -41,7 +39,6 @@ const hitBoxchecker = (direction, xObj_1, yObj_1, xSizeObj1, ySizeObj1, xObj_2, 
             else {
                 return true
             }
-            break;
         case "RIGHT":
             if( ( xObj_1 < xObj_2 + xSizeObj2 && xObj_2 - xObj_1 <= xSizeObj1 ) && ( yObj_1 < yObj_2 + ySizeObj2 && yObj_2 - yObj_1 < ySizeObj1 ) ) {
                 return false
@@ -49,7 +46,6 @@ const hitBoxchecker = (direction, xObj_1, yObj_1, xSizeObj1, ySizeObj1, xObj_2, 
             else {
                 return true
             }
-            break; 
     }
 }
 

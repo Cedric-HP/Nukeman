@@ -1,6 +1,6 @@
 import { objColliderChecker, positionBlackListChecker } from "./hit_Box.js"
 import { objHpMaxValue, objHpValue } from "./stats.js"
-import { hisIndestructible, lastHitByList, objList, objSpecial } from "./utilitys.js"
+import { generationUtilitises, hisIndestructible, lastHitByList, objList, objSpecial } from "./utilitys.js"
 
 // Block Id Cycle Checker
 
@@ -19,18 +19,58 @@ const cycleBlockId = () => {
     }
 }
 
+// Generation Timer
+
+let timer
+
+export function generationTimer ( time ) {
+    generationUtilitises.timeLeft = true
+    timer = setTimeout( () => {
+        generationUtilitises.timeLeft = false
+        generationUtilitises.isGenerating = false
+        generationUtilitises.finish = 0
+        removeHiddenClass()
+    }, (time * 1000) )
+}
+
+// Remove Hidden Class From Blocks
+
+const removeHiddenClass = () => {
+    const blocks = document.querySelectorAll(".hidden")
+    blocks.forEach( (block) => {
+        block.classList.remove("hidden")
+    })
+}
+
 // Generation Function
 
-export function generation (elementsToGenerate, indest, minSize, maxSize) {
-    let sizeSart = Object.keys(objList).length - objSpecial
-    let count = 0
-    do {
-        for (let i = 1; i <= elementsToGenerate; i++) {
-            createBlock(elementsToGenerate, indest, minSize, maxSize, count)
-            count = (Object.keys(objList).length - objSpecial) - sizeSart
-        }
-    } while ( count < elementsToGenerate)
+export function generation (elementsToGenerate, indest, minSize, maxSize, count) {
+    const looper = (elementsToGenerate, indest, minSize, maxSize, count) => {
+        setTimeout(() => {
+            for (let i = 1; i <= elementsToGenerate; i++) {
+                createBlock(elementsToGenerate, indest, minSize, maxSize, generationUtilitises[count], count)
+            }
+            if (generationUtilitises[count] < elementsToGenerate && generationUtilitises.timeLeft) {
+                looper(elementsToGenerate, indest, minSize, maxSize, count)
+            }
+            else if ( generationUtilitises[count] == elementsToGenerate ) {
+                generationUtilitises.finish ++
+                if (generationUtilitises.finish == generationUtilitises.executed) {
+                    clearTimeout(timer)
+                    removeHiddenClass()
+                    generationUtilitises.timeLeft = false
+                    generationUtilitises.isGenerating = false
+                    generationUtilitises.finish = 0
+                }
+            }
+        }, 0);
+    }
+    looper(elementsToGenerate, indest, minSize, maxSize, count)
 }
+
+
+
+
 
 // Remove All Block Function
 
@@ -44,11 +84,13 @@ export function removeBlock () {
             delete objList[item]
         }
     }
+    generationUtilitises.count1 = 0
+    generationUtilitises.count2 = 0
 }
 
 // Create Block Function
 
-const createBlock = (elementsToGenerate, indest, minSize, maxSize, count) => {
+const createBlock = (elementsToGenerate, indest, minSize, maxSize, count, countId) => {
     if (count < elementsToGenerate) {
 
         // Creating base of the block
@@ -60,6 +102,8 @@ const createBlock = (elementsToGenerate, indest, minSize, maxSize, count) => {
         block.style.width = width + "px";
         block.style.height = width + "px";
         block.style.position = "absolute";
+        block.classList.add("hidden")
+        block.classList.add("block")
         if (indest) {
             block.style.backgroundColor = "lightslategray";
         }
@@ -94,6 +138,7 @@ const createBlock = (elementsToGenerate, indest, minSize, maxSize, count) => {
             objHpMaxValue[objList["#" + String(block.id)]] = objHpValue[objList["#" + String(block.id)]]
             hisIndestructible[objList["#" + String(block.id)]] = indest
             lastHitByList[objList["#" + String(block.id)]] = ""
+            generationUtilitises[countId] ++
         }
         else {
             document.querySelector("#" + String(block.id)).remove()

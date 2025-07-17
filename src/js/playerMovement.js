@@ -101,17 +101,52 @@ document.addEventListener("keyup", (e) => {
     }
 })
 
-// Execute Movement Function
+// Frame Movement Function
 
-export function executeMovesPlayer1 () {
+const frameMovesPlayer1 = () => {
     for(let Key in controller) {
         if(controller[Key].pressed)
             moveplayer_1(controller[Key].name)
     }
 }
-export function executeMovesPlayer2 () {
+const frameMovesPlayer2 = () => {
     for(let Key in controller) {
         if(controller[Key].pressed)
             moveplayer_2(controller[Key].name)
+    }
+}
+
+let movePlayer1
+let movePlayer2 
+let moveP1Check = false
+let moveP2Check = false
+
+// Movement Execution
+
+export function executeMoves (speedP1, speedP2) {
+    if (moveP1Check)
+        clearInterval(movePlayer1)
+    if (moveP2Check)
+        clearInterval(movePlayer2)
+    movePlayer1 = setInterval(()=> {
+        frameMovesPlayer1()
+    }, speedP1)
+    movePlayer2 = setInterval(()=> {
+        frameMovesPlayer2()
+    }, speedP2)
+    moveP1Check = true
+    moveP2Check = true
+}
+
+// Stop Movement
+
+export function stopMoves () {
+    if (moveP1Check) {
+        clearInterval(movePlayer1)
+        moveP1Check = false
+    }
+    if (moveP2Check) {
+        clearInterval(movePlayer2)
+        moveP2Check = false
     }
 }

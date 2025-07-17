@@ -1,6 +1,7 @@
-import { objList, square_1, square_2, playerIdentifier, hisIndestructible, lastHitByList } from "./utilitys.js"
+import { objList, square_1, square_2, playerIdentifier, hisIndestructible, lastHitByList, hasTakeHit } from "./utilitys.js"
 import { bombPower, objHpValue, objHpMaxValue } from "./stats.js"
-import { hisInvincible, incincibility, invincibilityTime } from "./respawn.js"
+import { hisInvincible, incincibility, invincibilityTime } from "./playerAtributes.js"
+import { expAdd } from "./levelUp.js"
 
 // Hit Range Checker
 
@@ -46,6 +47,7 @@ export function explosionHitChecker (explosion, player, objListTested) {
                 lastHitByList[objListTested[objHitTested]] = player
                 if (objHpValue[objListTested[objHitTested]] > 0) {
                     hisInvincible[objListTested[objHitTested]] = true
+                    hasTakeHit[objListTested[objHitTested]].takeHit = true
                     invincibilityTime[objListTested[objHitTested]] += 75
                     incincibility(objListTested[objHitTested])
                 }
@@ -83,6 +85,7 @@ export function hpObjChecker () {
                 document.querySelector(objHpChecked).style.backgroundColor = "rgb(60, 60, 60)";
             }
             else if (objHpValue[objList[objHpChecked]] <= 0) {
+                expAdd(lastHitByList[objList[objHpChecked]], objHpMaxValue[objList[objHpChecked]])
                 document.querySelector(objHpChecked).remove()
                 delete lastHitByList[objList[objHpChecked]] 
                 delete hisIndestructible[objList[objHpChecked]]

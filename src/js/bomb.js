@@ -3,7 +3,7 @@
 
 import { objColliderChecker } from "./hit_Box.js"
 import { bombCount, bombList, hisIndestructible, square_1 } from "./utilitys.js"
-import { cooldowntimeset, maxBomb, bombtimeset, objHpValue } from "./stats.js"
+import { coolDownTimeSet, maxBomb, bombTimeSet, objHpValue } from "./stats.js"
 import { createExplosion } from "./explosion.js"
 
 // Import Display HTML
@@ -18,7 +18,7 @@ const idBombCycle = {
     player_2: 0
 }
 
-const bombcooldown = {
+const bombCoolDown = {
     player_1: true,
     player_2: true
 }
@@ -39,7 +39,7 @@ export function createBombe (square) {
     else {
         player = "player_2"
     }
-    if (bombCount[player] < maxBomb[player] && bombcooldown[player] && objColliderChecker(square, "ALL", bombList)) {
+    if (bombCount[player] < maxBomb[player] && bombCoolDown[player] && objColliderChecker(square, "ALL", bombList)) {
         let bombe = document.createElement("div")
         bombe.style.width = ( parseInt(square.style.width) + 2) + "px"
         bombe.style.height = ( parseInt(square.style.width) + 2) + "px"
@@ -49,14 +49,15 @@ export function createBombe (square) {
         bombe.style.top = square.style.top 
         bombe.style.left = square.style.left
         bombe.style.borderRadius = 50 + "%";
+        bombe.style.animation = "bombeTimer 0.5s infinite both";
         document.getElementById('playground').appendChild(bombe);
         bombList["#" + String(bombe.id)] = String(bombe.id)
         bombCount[player] += 1
-        bombcooldown[player] = false
+        bombCoolDown[player] = false
         hisIndestructible[String(bombe.id)] = false
         cycleBombId(player)
-        bombCoolDownSet(player, cooldowntimeset[player])
-        bombTimer(String("#" + String(bombe.id)), player, bombtimeset[player])
+        bombCoolDownSet(player, coolDownTimeSet[player])
+        bombTimer(String("#" + String(bombe.id)), player, bombTimeSet[player])
     }
 }
 
@@ -76,9 +77,9 @@ const bombCoolDownSet = (player, cooldowntime) => {
             display.textContent = timer
         }
         else {
-            display.style.color = "blue";
+            display.style.color = "green";
             display.textContent = "Ready!";
-            bombcooldown[player] = true
+            bombCoolDown[player] = true
             clearInterval(contDown)
         }
     }, "10")
@@ -90,21 +91,13 @@ export function bombTimer (bombId, player, cooldowntime)  {
     let timer = cooldowntime
     const contDownTimer = setInterval(() => {
         let hpvalue = objHpValue[bombList[bombId]]
-        timer -= 20
-        if (timer > 0) {
-            if ((timer/20) % 2 == 0) {
-                document.querySelector(bombId).style.backgroundColor = "red";
-            }
-            else {
-                document.querySelector(bombId).style.backgroundColor = "black";
-            }
-        }
-        else if (timer == 0 || hpvalue <= 0) {
+        timer -= 1
+        if (timer == 0 || hpvalue <= 0) {
             createExplosion(bombId, player)
             bombCount[player] -= 1
             delete hisIndestructible[bombList[bombId]]
             delete bombList[bombId]
             clearInterval(contDownTimer)
         }
-    }, "200")
+    }, "10")
 }

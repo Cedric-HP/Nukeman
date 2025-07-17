@@ -1,5 +1,6 @@
 * {
     margin: 0;
+    font-family: "Pixelify Sans", sans-serif
 }
 
 body {
@@ -20,10 +21,22 @@ body {
     background-color: gainsboro;
 }
 
-#stats {
+.part {
     display: flex;
-    width: 260px;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 90vh;
+}
+
+.stats {
+    display: flex;
+    width: 300px;
     flex-flow: column;
+    padding: 15px;
+    border: 1px solid black;
+    border-radius: 15px;
+    margin-top: 20px;
+    background-color: gainsboro;
 }
 
 /* Players Bodys */
@@ -41,14 +54,61 @@ body {
     border: 1px solid red;
 }
 
-/* Display Stats */
+/* Score Display */
 
-.display, .display_hp {
+#center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 900px;
+    gap: 10px;
+}
+
+#scoreBoard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 15px;
     border: 1px solid black;
     border-radius: 15px;
-    margin-top: 20px;
     background-color: gainsboro;
+}
+
+.killcount {
+    font-size: 2rem;
+}
+
+#round {
+    font-size: 2rem;
+}
+
+.p1 {
+    color: blue;
+}
+.p2 {
+    color: red;
+}
+
+#centerboard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#timer {
+    font-size: 1.2rem;
+}
+
+/* Display Stats */
+
+.display, .display_hp {
+    margin: 20px 0;
+}
+.display {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .display_hp {
     display: flex;
@@ -62,6 +122,13 @@ body {
     display: flex;
     justify-content: flex-start;
 }
+.expbarre {
+    border: 1px solid black;
+    width: 200px;
+    height: 6px;
+    display: flex;
+    justify-content: flex-start;
+}
 #hpValuePlayer1, #hpValuePlayer2 {
     font-size: 1.5rem;
     font-weight: 600;
@@ -71,10 +138,15 @@ body {
     height: 100%;
     background-color: green;
 }
+#expPlayer1, #expPlayer2 {
+    width: 0%;
+    height: 100%;
+    background-color: greenyellow;
+}
 #cooldown_player_1, #cooldown_player_2 {
     font-size: 1.5rem;
     font-weight: 600;
-    color: blue;
+    color: green;
 }
 
 /* Button Section */
@@ -89,10 +161,23 @@ body {
     padding: 10px;
     border: 1px solid black;
     border-radius: 5px;
-    background-color: lightslategray;
+    background-color: darkgray;
+    transition: transform 0.2s;
+    font-size: 1.2rem;
 }
+
+.button:hover{
+    transform: scale(1.05, 1.05);
+}
+
 .button:active {
     background-color: rgb(161, 126, 126);
+}
+
+/* Utilitises */
+
+.hidden {
+    display: none;
 }
 
 /* Animation Section */
@@ -143,5 +228,17 @@ body {
         box-shadow: 0 0 12px rgb(131, 131, 131);
         transform: scale(5, 5);
         opacity: 0;
+    }
+}
+
+@keyframes bombeTimer {
+    0% {
+        background-color: black;
+    }
+    50% {
+        background-color: red;
+    }
+    100% {
+        background-color: black;
     }
 }

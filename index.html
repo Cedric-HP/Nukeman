@@ -5,47 +5,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nukeman</title>
     <link rel="stylesheet" href="./src/styles.css" />
+
+    <!-- Font -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <!-- Play-Ground Section -->
-
-    <section id="playground">
-      <div id="body_1"></div>
-      <div id="body_2"></div>
-    </section>
-
-    <!-- Stats Section -->
-
-    <section id="stats">
-      <!-- PLayer 1 Stats -->
-
-      <div class="display_hp">
-        <span id="hpValuePlayer1">100 HP</span>
-        <div class="hpbarre">
-          <div id="hpPlayer1"></div>
-        </div>
-      </div>
-      <div class="display">
-        P1 Bombe Cooldown: <span id="cooldown_player_1">Ready!</span>
-      </div>
-
-      <!-- Player 2 Stats  -->
-
-      <div class="display_hp">
-        <span id="hpValuePlayer2">100 HP</span>
-        <div class="hpbarre">
-          <div id="hpPlayer2"></div>
-        </div>
-      </div>
-      <div class="display">
-        P2 Bombe Cooldown: <span id="cooldown_player_2">Ready!</span>
-      </div>
-
+    <section class="part">
       <!-- Button Section -->
 
-      <div class="display buttonfield">
-        <button class="button" id="generate_button">Generate the Map</button>
-        <button class="button" id="restart_button">Restart</button>
+      <div class="stats buttonfield">
+        <button class="button" id="generate_button" tabindex="-1">
+          Generate the Map
+        </button>
+        <button class="button" id="restart_button" tabindex="-1">
+          Restart
+        </button>
+      </div>
+      <div class="stats">
+        <!-- PLayer 1 Stats -->
+
+        <div class="display_hp">
+          <span id="hpValuePlayer1" class="p1">100 HP</span>
+          <div class="hpbarre">
+            <div id="hpPlayer1"></div>
+          </div>
+        </div>
+        <hr />
+        <div class="display">
+          P1 Bombe Cooldown: <span id="cooldown_player_1">Ready!</span>
+        </div>
+        <hr>
+        <div class="display">
+          <span class="exp_info p1" id="expInfoP1">Level 1 | EXP: 0 / 1000</span>
+          <div class="expbarre">
+            <div id="expPlayer1"></div>
+          </div>
+      </div>
+    </section>
+
+    <!-- Play-Ground Section -->
+    <section id="center">
+      <div id="scoreBoard">
+        <p class="killcount p1">Kill Count: <span id="killcountP1">0</span></p>
+        <div id="centerboard">
+          <div id="round">
+            <span id="roundP1" class="p1">0</span> |
+            <span id="roundP2" class="p2">0</span>
+          </div>
+          <span id="timer">5:00</span>
+        </div>
+        <p class="killcount p2"><span id="killcountP2">0</span> : Kill Count</p>
+      </div>
+      <div id="playground">
+        <div id="body_1"></div>
+        <div id="body_2"></div>
+      </div>
+    </section>
+
+    <section class="part">
+      <div></div>
+      <!-- Player 2 Stats  -->
+
+      <div class="stats">
+        <div class="display_hp">
+          <span id="hpValuePlayer2" class="p2">100 HP</span>
+          <div class="hpbarre">
+            <div id="hpPlayer2"></div>
+          </div>
+        </div>
+        <hr />
+        <div class="display">
+          P2 Bombe Cooldown: <span id="cooldown_player_2">Ready!</span>
+        </div>
+        <hr>
+        <div class="display">
+          <span class="exp_info p2" id="expInfoP2">Level 1 | EXP: 0 / 1000</span>
+          <div class="expbarre">
+            <div id="expPlayer2"></div>
+          </div>
+        </div>
       </div>
     </section>
     <script type="module" src="./src/js/script.js"></script>
