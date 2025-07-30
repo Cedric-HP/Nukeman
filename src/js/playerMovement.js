@@ -1,7 +1,7 @@
 
 // Import
 
-import { objList, square_1, square_2 } from "./utilitys.js";
+import { menuUtility, objList, square_1, square_2 } from "./utilitys.js";
 import { createBombe } from "./bomb.js";
 import { objColliderChecker } from "./hit_Box.js";
 import { objHpValue, movingByP1, movingByP2 } from "./stats.js";
@@ -129,10 +129,12 @@ export function executeMoves (speedP1, speedP2) {
     if (moveP2Check)
         clearInterval(movePlayer2)
     movePlayer1 = setInterval(()=> {
-        frameMovesPlayer1()
+        if (!menuUtility.inPause)
+            frameMovesPlayer1()
     }, speedP1)
     movePlayer2 = setInterval(()=> {
-        frameMovesPlayer2()
+        if (!menuUtility.inPause)
+            frameMovesPlayer2()
     }, speedP2)
     moveP1Check = true
     moveP2Check = true

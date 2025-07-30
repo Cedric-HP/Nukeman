@@ -5,7 +5,6 @@
 
 body {
     height: 100vh;
-    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,6 +18,43 @@ body {
     width: 900px;
     border: 2px solid black;
     background-color: gainsboro;
+    z-index: -1;
+}
+
+#playground-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(68, 68, 68, 0.37);
+    backdrop-filter: blur(2px);
+    height: 800px;
+    width: 900px;
+    z-index: 2;
+    transition: animation 0.2s, opacity 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#pause-logo {
+    height: 60px;
+    width: 50px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    border: 0;
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+    transition: transform 0.2s;
+    z-index: 3;
+}
+
+.pause-part {
+    height: 60px;
+    width: 22px;
+    background-color: white;
+    transition: background-color 0.1s;
 }
 
 .part {
@@ -62,6 +98,7 @@ body {
     justify-content: center;
     width: 900px;
     gap: 10px;
+    z-index: 0;
 }
 
 #scoreBoard {
@@ -162,12 +199,22 @@ body {
     border: 1px solid black;
     border-radius: 5px;
     background-color: darkgray;
-    transition: transform 0.2s;
+    transition: transform 0.2s, background-color 0.1s;
     font-size: 1.2rem;
 }
 
 .button:hover{
-    transform: scale(1.05, 1.05);
+    transform: scale(1.1, 1.1);
+}
+
+.action-button:hover {
+    transform: scale(1.1, 1.1);
+}
+
+.action-button:active {
+    .pause-part {
+        background-color: rgb(192, 92, 92);
+    }
 }
 
 .button:active {
@@ -240,5 +287,56 @@ body {
     }
     100% {
         background-color: black;
+    }
+}
+
+@keyframes invincibilityAura {
+    0% {
+        border-color: black;
+    }
+    50% {
+        border-color: yellow;
+    }
+    100% {
+        border-color: black;
+    }
+}
+
+@keyframes appearance {
+    0% {
+        transform: scale(0,0);
+    }
+    100% {
+        transform: scale(1,1);
+    }
+}
+
+@keyframes flicker {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes opacityIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes opacityOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
     }
 }

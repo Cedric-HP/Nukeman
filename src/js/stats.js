@@ -10,7 +10,8 @@ export {
     playerScore,
     levelCap,
     regenerationStats,
-    moveSpeed
+    movementSpeed,
+    powerUpList
 }
 
 // Hp Values of Obj (including Players)
@@ -39,7 +40,7 @@ const regenerationStats = {
 const movingByP1 = 1
 const movingByP2 = 1
 
-const moveSpeed = {
+const movementSpeed = {
     player_1: 8,
     player_2: 8
 }
@@ -85,12 +86,27 @@ const playerScore = {
 const levelCap = {
     1:{ cap: 750, bombpower: 1, cooldown: 10, multi: 0, bombcount: 0, bombset: 0, maxHp: 10, regenspeed: 0},
     2:{ cap: 1250, bombpower: 1, cooldown: 10, multi: 0, bombcount: 0, bombset: 0, maxHp: 10, regenspeed: 0},
-    3:{ cap: 2000, bombpower: 1, cooldown: 10, multi: 0, bombcount: 0, bombset: 10, maxHp: 10, regenspeed: 0},
+    3:{ cap: 2000, bombpower: 1, cooldown: 10, multi: 0, bombcount: 0, bombset: 0, maxHp: 10, regenspeed: 0},
     4:{ cap: 3000, bombpower: 1, cooldown: 10, multi: 0, bombcount: 0, bombset: 10, maxHp: 10, regenspeed: 0},
     5:{ cap: 5000, bombpower: 1, cooldown: 10, multi: 0, bombcount: 1, bombset: 10, maxHp: 10, regenspeed: 0.1},
-    6:{ cap: 7500, bombpower: 1, cooldown: 10, multi: 0, bombcount: 0, bombset: 10, maxHp: 10, regenspeed: 0.1},
+    6:{ cap: 7500, bombpower: 1, cooldown: 10, multi: 0, bombcount: 0, bombset: 20, maxHp: 10, regenspeed: 0.1},
     7:{ cap: 10000, bombpower: 1, cooldown: 10, multi: 0.1, bombcount: 0, bombset: 20, maxHp: 10, regenspeed: 0.1},
     8:{ cap: 15000, bombpower: 1, cooldown: 10, multi: 0.15, bombcount: 0, bombset: 20, maxHp: 10, regenspeed: 0.1},
     9:{ cap: 25000, bombpower: 1, cooldown: 20, multi: 0, bombcount:  1, bombset: 20, maxHp: 20, regenspeed: 0.1},
     10:{ cap: 0 }
+}
+
+// PowerUp List
+
+const powerUpList = {
+    normal: [
+        { name: "movement_speed", color: "green"},
+        { name: "heal", color: "deeppink"},
+        { name: "sizeShift", color: "maroon"}
+    ],
+    powerfull: [
+        { name: "invincibility", color: "yellow"}
+        // { name: "nukePower", color: "greenyellow"}
+        // { name: "xp", color: "greenyellow"}
+    ]
 }

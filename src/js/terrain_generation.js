@@ -1,14 +1,14 @@
 import { objColliderChecker, positionBlackListChecker } from "./hit_Box.js"
 import { objHpMaxValue, objHpValue } from "./stats.js"
-import { generationUtilitises, hisIndestructible, lastHitByList, objList, objSpecial } from "./utilitys.js"
+import { generationUtilitises, hisIndestructible, lastHitByList, objList, objCount } from "./utilitys.js"
 
 // Block Id Cycle Checker
 
 const cycleBlockId = () => {
-    for (let i = 1; i <= Object.keys(objList).length - objSpecial + 1; i++) {
+    for (let i = 1; i <= objCount.block.count + 1; i++) {
         let check = true
         for (let obj in objList) {
-            if (obj != "#body_1" && obj != "#body_2" && obj == String("#block_"+i)) {
+            if (obj == String("#block_"+i)) {
                 check = false
                 break;
             }
@@ -39,6 +39,7 @@ const removeHiddenClass = () => {
     const blocks = document.querySelectorAll(".hidden")
     blocks.forEach( (block) => {
         block.classList.remove("hidden")
+        block.style.animation = "appearance 0.2s 1"
     })
 }
 
@@ -84,6 +85,7 @@ export function removeBlock () {
             delete objList[item]
         }
     }
+    objCount.block.count = 0
     generationUtilitises.count1 = 0
     generationUtilitises.count2 = 0
 }
@@ -91,7 +93,7 @@ export function removeBlock () {
 // Create Block Function
 
 const createBlock = (elementsToGenerate, indest, minSize, maxSize, count, countId) => {
-    if (count < elementsToGenerate) {
+    if (count < elementsToGenerate && objCount.block.count < objCount.block.max) {
 
         // Creating base of the block
 
@@ -121,7 +123,7 @@ const createBlock = (elementsToGenerate, indest, minSize, maxSize, count, countI
             block.style.top = Math.round(Math.floor(0 + Math.random() * (parseInt(playground.height) - width))) + "px"
             block.style.left = Math.round(Math.floor(0 + Math.random() * (parseInt(playground.width) - width))) + "px"
             checkcolide = objColliderChecker(block, "ALL", objList)
-            checkposition = positionBlackListChecker(block)
+            checkposition = positionBlackListChecker(block, "ALL")
             if (testcount % 100 == 0) {
                 width = Math.round( width / 2) + 20
                 block.style.width = width + "px";
@@ -139,6 +141,7 @@ const createBlock = (elementsToGenerate, indest, minSize, maxSize, count, countI
             hisIndestructible[objList["#" + String(block.id)]] = indest
             lastHitByList[objList["#" + String(block.id)]] = ""
             generationUtilitises[countId] ++
+            objCount.block.count ++
         }
         else {
             document.querySelector("#" + String(block.id)).remove()

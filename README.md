@@ -15,14 +15,16 @@
 - [x] Collisions (Obstacles, players, Enemies, Nuke)
 - [x] The Respawn
 - [ ] Timer
-- [ ] Powers up
-  - [ ] Random spawn and pickup object
+- [x] Regeneration after a hit (with a cooldown)
+- [x] Powers up
+  - [x] Random spawn and pickup object
   - [x] Invincibility (Temporary)
-  - [ ] Nuke Power (Stackable)
-  - [ ] Number of Nukes (Stackable)
-  - [ ] Changing the player size (Temporary)
+  - [ ] Nuke Power (Temporary)
+  - [x] Speed Boost
+  - [x] Heal (Max Heath)
+  - [x] Changing the player size (Temporary)
 - [ ] Menu
-- [ ] Level system
+- [x] Level system
 - [ ] Win round by the one who has the most kill
 
 # NUKEMAN
@@ -42,12 +44,14 @@
 - [x] Collisions (Obstacles, joueurs, Ennemis, Nuke)
 - [x] Le Respawn
 - [ ] Un Minuteur
-- [ ] Les Powers Up
-  - [ ] Spawn aléatoire et objet ramassable
+- [x] Régénération après un coup (avec un CoolDown)
+- [x] Les Powers Up
+  - [x] Spawn aléatoire et objet ramassable
   - [x] Invincibilité (Temporaire)
-  - [ ] Nuke Power (Stackable)
-  - [ ] Nombre de Nuke (Stackable)
-  - [ ] Modification de la taille du joueur (Temporaire)
+  - [ ] Nuke Power (Temporaire)
+  - [x] Boost de vitesse
+  - [x] Soin (PV Max)
+  - [x] Modification de la taille du joueur (Temporaire)
 - [ ] Menu
-- [ ] Système de niveaux
+- [x] Système de niveaux
 - [ ] Manche gagnée par celui qui a le plus de kill

@@ -20,11 +20,14 @@
       <!-- Button Section -->
 
       <div class="stats buttonfield">
-        <button class="button" id="generate_button" tabindex="-1">
+        <button class="button" id="generate_button" tabindex="-1" disabled="true">
           Generate the Map
         </button>
-        <button class="button" id="restart_button" tabindex="-1">
+        <button class="button" id="restart_button" tabindex="-1" disabled="true">
           Restart
+        </button>
+        <button class="button" id="pause_button" tabindex="-1" disabled="true">
+          Pause
         </button>
       </div>
       <div class="stats">
@@ -63,8 +66,12 @@
         <p class="killcount p2"><span id="killcountP2">0</span> : Kill Count</p>
       </div>
       <div id="playground">
-        <div id="body_1"></div>
-        <div id="body_2"></div>
+        <div id="playground-cover">
+          <button class="action-button" id="pause-logo">
+            <div class="pause-part"></div>
+            <div class="pause-part"></div>
+          </button>
+        </div>
       </div>
     </section>
 

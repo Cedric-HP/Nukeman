@@ -1,4 +1,4 @@
-import { hitCoolDown, hitCoolDownP1, hitCoolDownP2, regenP1, regenP2 } from "./playerAtributes.js";
+import { regenP1, regenP2 } from "./playerAtributes/regeneration.js";
 import { bombPower, bombTimeSet, coolDownTimeSet, levelCap, maxBomb, objHpMaxValue, playerScore, regenerationStats } from "./stats.js";
 import { hasTakeHit, playerlist } from "./utilitys.js";
 

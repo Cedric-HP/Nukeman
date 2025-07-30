@@ -1,4 +1,5 @@
 import { square_1, square_2, positionBlackList } from "./utilitys.js"
+export {directionList}
 
 const directionList = ["UP", "DOWN", "LEFT", "RIGHT"]
 
@@ -49,68 +50,79 @@ const hitBoxchecker = (direction, xObj_1, yObj_1, xSizeObj1, ySizeObj1, xObj_2, 
     }
 }
 
+// Object collider Function for 2 object given
+
+export function objColliderBetween (obj, direction, objTested) {
+    let checked = true
+    if (obj != document.querySelector(objTested) && 
+    ( (obj.id != "player_1_X2") || (document.querySelector(objTested) != square_1) ) &&
+    ( (obj.id != "player_2_X2") || (document.querySelector(objTested) != square_2) ) 
+    ) {
+        if (obj == square_1 || obj == square_2) {
+            if(document.querySelector(objTested) == square_1 || document.querySelector(objTested) == square_2) {
+                checked = hitBoxchecker(
+                    direction,
+                    parseInt(obj.style.left),
+                    parseInt(obj.style.top),
+                    (parseInt(obj.style.width)+2),
+                    (parseInt(obj.style.height)+2),
+                    parseInt(document.querySelector(objTested).style.left),
+                    parseInt(document.querySelector(objTested).style.top),
+                    (parseInt(document.querySelector(objTested).style.width)+2),
+                    (parseInt(document.querySelector(objTested).style.height)+2) )
+            }
+            else {
+                checked = hitBoxchecker(
+                    direction,
+                    parseInt(obj.style.left),
+                    parseInt(obj.style.top),
+                    (parseInt(obj.style.width)+2),
+                    (parseInt(obj.style.height)+2),
+                    parseInt(document.querySelector(objTested).style.left),
+                    parseInt(document.querySelector(objTested).style.top),
+                    parseInt(document.querySelector(objTested).style.width),
+                    parseInt(document.querySelector(objTested).style.height)
+                )
+            }
+        }
+        else {
+            if(document.querySelector(objTested) == square_1 || document.querySelector(objTested) == square_2) {
+                checked = hitBoxchecker(
+                    direction,
+                    parseInt(obj.style.left),
+                    parseInt(obj.style.top),
+                    parseInt(obj.style.width),
+                    parseInt(obj.style.height),
+                    parseInt(document.querySelector(objTested).style.left),
+                    parseInt(document.querySelector(objTested).style.top),
+                    (parseInt(document.querySelector(objTested).style.width)+2),
+                    (parseInt(document.querySelector(objTested).style.height)+2)
+                )
+            }
+            else {
+                checked = hitBoxchecker(
+                    direction,
+                    parseInt(obj.style.left),
+                    parseInt(obj.style.top),
+                    parseInt(obj.style.width),
+                    parseInt(obj.style.height),
+                    parseInt(document.querySelector(objTested).style.left),
+                    parseInt(document.querySelector(objTested).style.top),
+                    parseInt(document.querySelector(objTested).style.width),
+                    parseInt(document.querySelector(objTested).style.height)
+                )
+            }
+        }
+    }
+    return checked
+}
+
 // Function used by "objColliderChecker" to execute the Hit-Box Check
 
 const objColliderTester = (obj, direction, objListed) => {
     let checked = true
     for (let objTested in objListed) {
-        if (obj != document.querySelector(objTested)) {
-            if (obj == square_1 || obj == square_2) {
-                if(document.querySelector(objTested) == square_1 || document.querySelector(objTested) == square_2) {
-                    checked = hitBoxchecker(
-                        direction,
-                        parseInt(obj.style.left),
-                        parseInt(obj.style.top),
-                        (parseInt(obj.style.width)+2),
-                        (parseInt(obj.style.height)+2),
-                        parseInt(document.querySelector(objTested).style.left),
-                        parseInt(document.querySelector(objTested).style.top),
-                        (parseInt(document.querySelector(objTested).style.width)+2),
-                        (parseInt(document.querySelector(objTested).style.height)+2) )
-                }
-                else {
-                    checked = hitBoxchecker(
-                        direction,
-                        parseInt(obj.style.left),
-                        parseInt(obj.style.top),
-                        (parseInt(obj.style.width)+2),
-                        (parseInt(obj.style.height)+2),
-                        parseInt(document.querySelector(objTested).style.left),
-                        parseInt(document.querySelector(objTested).style.top),
-                        parseInt(document.querySelector(objTested).style.width),
-                        parseInt(document.querySelector(objTested).style.height)
-                    )
-                }
-            }
-            else {
-                if(document.querySelector(objTested) == square_1 || document.querySelector(objTested) == square_2) {
-                    checked = hitBoxchecker(
-                        direction,
-                        parseInt(obj.style.left),
-                        parseInt(obj.style.top),
-                        parseInt(obj.style.width),
-                        parseInt(obj.style.height),
-                        parseInt(document.querySelector(objTested).style.left),
-                        parseInt(document.querySelector(objTested).style.top),
-                        (parseInt(document.querySelector(objTested).style.width)+2),
-                        (parseInt(document.querySelector(objTested).style.height)+2)
-                    )
-                }
-                else {
-                    checked = hitBoxchecker(
-                        direction,
-                        parseInt(obj.style.left),
-                        parseInt(obj.style.top),
-                        parseInt(obj.style.width),
-                        parseInt(obj.style.height),
-                        parseInt(document.querySelector(objTested).style.left),
-                        parseInt(document.querySelector(objTested).style.top),
-                        parseInt(document.querySelector(objTested).style.width),
-                        parseInt(document.querySelector(objTested).style.height)
-                    )
-                }
-            }
-        }
+        checked = objColliderBetween(obj, direction, objTested)
         if (!checked) {
             return false
         }
@@ -144,23 +156,49 @@ export function objColliderChecker (obj, directionInput, objObjectList) {
     return true
 }
 
-export function positionBlackListChecker (objPositionTested) {
+export function positionBlackListChecker (objPositionTested, zone) {
     let check = true
-    for (let position in positionBlackList) {
-        for(let direction of directionList) {
-            check = hitBoxchecker(
-                direction, 
-                parseInt(objPositionTested.style.left), 
-                parseInt(objPositionTested.style.top), 
-                parseInt(objPositionTested.style.width), 
-                parseInt(objPositionTested.style.height),
-                positionBlackList[position][0],
-                positionBlackList[position][1],
-                positionBlackList[position][2],
-                positionBlackList[position][3]
-             )
+    if (zone == "ALL") {
+        for (let position in positionBlackList) {
+            for(let direction of directionList) {
+                check = hitBoxchecker(
+                    direction, 
+                    parseInt(objPositionTested.style.left), 
+                    parseInt(objPositionTested.style.top), 
+                    parseInt(objPositionTested.style.width), 
+                    parseInt(objPositionTested.style.height),
+                    positionBlackList[position][0],
+                    positionBlackList[position][1],
+                    positionBlackList[position][2],
+                    positionBlackList[position][3]
+                 )
+            }
+            if (!check) {
+                return false
+            }
         }
-        if (!check) {
+    }
+    else {
+        if (positionBlackList[zone]) {
+            for(let direction of directionList) {
+                check = hitBoxchecker(
+                    direction, 
+                    parseInt(objPositionTested.style.left), 
+                    parseInt(objPositionTested.style.top), 
+                    parseInt(objPositionTested.style.width), 
+                    parseInt(objPositionTested.style.height),
+                    positionBlackList[zone][0],
+                    positionBlackList[zone][1],
+                    positionBlackList[zone][2],
+                    positionBlackList[zone][3]
+                 )
+            }
+            if (!check) {
+                return false
+            }
+        }
+        else {
+            console.log(`${zone} doen't exist in positionBlackList`)
             return false
         }
     }

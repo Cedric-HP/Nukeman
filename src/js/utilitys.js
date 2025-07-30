@@ -1,3 +1,6 @@
+import { executeMoves } from "./playerMovement.js"
+import { movementSpeed } from "./stats.js"
+
 export {
     playerIdentifier,
     bombCount,
@@ -10,16 +13,49 @@ export {
     hisIndestructible,
     positionBlackList,
     playground,
-    objSpecial,
+    objCount,
     hasTakeHit,
-    generationUtilitises
+    generationUtilitises,
+    powerUpObjList,
+    playerTimers,
+    hisInvincible,
+    hisRespawning,
+    menuUtility,
+    restartButton,
+    generateButton,
+    pauseButton,
+    playgroundCover,
+    pauseLogo
 }
 
-// Players HTML import
+// Menu Utilitise
 
-let square_1 = document.querySelector("#body_1")
-let square_2 = document.querySelector("#body_2")
-let playground = document.querySelector("#playground")
+const menuUtility = {
+    inPause: true
+}
+
+// Create Players and HTML import
+
+const playground = document.querySelector("#playground")
+const playgroundCover = document.querySelector("#playground-cover")
+
+const square_1 = document.createElement("div")
+square_1.id = "body_1"
+square_1.style.opacity = "0"
+document.querySelector("#playground").appendChild(square_1)
+
+const square_2 = document.createElement("div")
+square_2.id = "body_2"
+square_2.style.opacity = "0"
+document.querySelector("#playground").appendChild(square_2)
+
+const generateButton = document.querySelector("#generate_button")
+const restartButton = document.querySelector("#restart_button")
+const pauseButton = document.querySelector("#pause_button")
+pauseButton.textContent = "Pause"
+const pauseLogo = document.querySelector("#pause-logo")
+pauseLogo.style.opacity = "0"
+pauseLogo.disabled = true
 
 // Loader
 
@@ -31,11 +67,24 @@ window.addEventListener("load", () => {
     square_1.style.top = 20 + "px";
     square_1.style.height = 18 + "px";
     square_1.style.width = 18 + "px";
+    square_1.style.opacity = "1"
+    square_1.style.animation = "appearance 0.2s 1"
     square_2.style.position = "absolute";
     square_2.style.height = 18 + "px";
     square_2.style.width = 18 + "px";
     square_2.style.left = ((parseInt(playground.width) - 20 ) - parseInt(square_2.style.width)) + "px";
     square_2.style.top = ((parseInt(playground.height) - 20 ) - parseInt(square_2.style.width)) + "px";
+    square_2.style.opacity = "1"
+    square_2.style.animation = "appearance 0.2s 1"
+    playgroundCover.style.animation = "opacityOut 0.2s 1 both"
+    generateButton.disabled = false
+    restartButton.disabled = false
+    pauseButton.disabled = false
+    menuUtility.inPause = false
+    executeMoves(movementSpeed.player_1, movementSpeed.player_2)
+    setTimeout(()=>{
+        pauseLogo.style.opacity = "1"
+    },200)
 })
 
 // Player Identifier
@@ -43,6 +92,20 @@ window.addEventListener("load", () => {
 const playerIdentifier = {
     player_1: square_1,
     player_2: square_2
+}
+
+// His Invincible Variable
+
+const hisInvincible = {
+    player_1: false,
+    player_2: false
+}
+
+// His Respawning Variable
+
+const hisRespawning = {
+    player_1: false,
+    player_2: false
 }
 
 // Player List
@@ -60,6 +123,10 @@ const objList = {
 
 const bombList = {}
 
+// PowerUp Object List
+
+const powerUpObjList = {}
+
 // Last Hit By List
 
 const lastHitByList = {
@@ -67,15 +134,32 @@ const lastHitByList = {
     player_2: ""
 }
 
+// Player Timers
+
+const playerTimers = {
+    player_1: {
+        invincibility: 0,
+        movementSpeedBoost: 0,
+        sizeShift: 0
+    },
+    player_2: {
+        invincibility: 0,
+        movementSpeedBoost: 0,
+        sizeShift: 0
+    }
+}
+
 //Generation Utilitise
 
 const generationUtilitises = {
     isGenerating: false,
     timeLeft: false,
+    hisGenIntervalPowerUp: false,
     executed: 0,
     finish: 0,
     count1: 0,
     count2: 0,
+    count3: 0
 }
 
 // His Indestructible (for blocks)
@@ -96,9 +180,13 @@ const bombCount = {
     player_2: 0
 }
 
-// Object Special
+// Object Count
 
-let objSpecial = 2
+const objCount = {
+    objSpecial: 2,
+    block: {count: 0, max: 120},
+    powerUp: {count: 0, max: 30}
+}
 
 // Position Black Listed
 /**

@@ -1,7 +1,7 @@
-import { objList, square_1, square_2, playerIdentifier, hisIndestructible, lastHitByList, hasTakeHit } from "./utilitys.js"
+import { objList, square_1, square_2, playerIdentifier, hisIndestructible, lastHitByList, hasTakeHit, playerTimers, hisInvincible } from "./utilitys.js"
 import { bombPower, objHpValue, objHpMaxValue } from "./stats.js"
-import { hisInvincible, incincibility, invincibilityTime } from "./playerAtributes.js"
 import { expAdd } from "./levelUp.js"
+import { invincibility } from "./playerAtributes/invincibility.js"
 
 // Hit Range Checker
 
@@ -48,8 +48,9 @@ export function explosionHitChecker (explosion, player, objListTested) {
                 if (objHpValue[objListTested[objHitTested]] > 0) {
                     hisInvincible[objListTested[objHitTested]] = true
                     hasTakeHit[objListTested[objHitTested]].takeHit = true
-                    invincibilityTime[objListTested[objHitTested]] += 75
-                    incincibility(objListTested[objHitTested])
+                    playerTimers[[objListTested[objHitTested]]].invincibility += 75
+                    invincibility(objListTested[objHitTested])
+                    console.log("has take damage")
                 }
             }
         }
@@ -85,13 +86,13 @@ export function hpObjChecker () {
                 document.querySelector(objHpChecked).style.backgroundColor = "rgb(60, 60, 60)";
             }
             else if (objHpValue[objList[objHpChecked]] <= 0) {
-                expAdd(lastHitByList[objList[objHpChecked]], objHpMaxValue[objList[objHpChecked]])
                 document.querySelector(objHpChecked).remove()
+                expAdd(lastHitByList[objList[objHpChecked]], objHpMaxValue[objList[objHpChecked]])
                 delete lastHitByList[objList[objHpChecked]] 
                 delete hisIndestructible[objList[objHpChecked]]
                 delete objHpValue[objList[objHpChecked]]
                 delete objHpMaxValue[objList[objHpChecked]]
-                delete objList[objHpChecked]  
+                delete objList[objHpChecked]
             } 
         }
     }

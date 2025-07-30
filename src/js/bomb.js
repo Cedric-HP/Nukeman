@@ -2,7 +2,7 @@
 // Import
 
 import { objColliderChecker } from "./hit_Box.js"
-import { bombCount, bombList, hisIndestructible, square_1 } from "./utilitys.js"
+import { bombCount, bombList, hisIndestructible, menuUtility, square_1 } from "./utilitys.js"
 import { coolDownTimeSet, maxBomb, bombTimeSet, objHpValue } from "./stats.js"
 import { createExplosion } from "./explosion.js"
 
@@ -72,7 +72,8 @@ const bombCoolDownSet = (player, cooldowntime) => {
     }
     display.style.color = "red";
     const contDown = setInterval(() => {
-        timer -= 1
+        if (!menuUtility.inPause)
+            timer -= 1
         if(timer > 0) {
             display.textContent = timer
         }
@@ -90,9 +91,9 @@ const bombCoolDownSet = (player, cooldowntime) => {
 export function bombTimer (bombId, player, cooldowntime)  {
     let timer = cooldowntime
     const contDownTimer = setInterval(() => {
-        let hpvalue = objHpValue[bombList[bombId]]
-        timer -= 1
-        if (timer == 0 || hpvalue <= 0) {
+        if (!menuUtility.inPause)
+            timer -= 1
+        if (timer == 0 || objHpValue[bombList[bombId]] <= 0) {
             createExplosion(bombId, player)
             bombCount[player] -= 1
             delete hisIndestructible[bombList[bombId]]
